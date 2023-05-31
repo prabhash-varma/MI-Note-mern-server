@@ -435,51 +435,6 @@ app.post("/updateitem", verifyJWT, async (req, res) => {
 
 
 
-/**
- * @swagger
- * /updatestatus:
- *  post:
- *     summary: update an item status completed/not completed
- *     description: update an item with given item id and updates its status in the database
- *     requestBody:
- *        description: Enter MongoDB id of the item to be updated
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *          
- * 
- * 
- *     responses:
- *         200:
- *            description: Success
- *            content:
- *                application/json:
- *                    schema:
- *                      type: array
- *                      items:
- *                        $ref: '#components/schemas/Item'
- * 
- */
-app.post("/updatestatus", async (req, res) => {
-  let itemid = req.body.itemid;
-  console.log(itemid);
-  await Items.updateOne({ _id: itemid }, {
-    status: "completed"
-  }).then(() => {
-    console.log("Item status updated successfully");
-    res.json({ auth: true, message: "Item status updated successfully" });
-  }).catch((err) => {
-    console.log(err);
-    res.json({ auth: false, message: "Item status updated successfully" });
-  });
-
-
-}
-);
-
-
 
 
 
